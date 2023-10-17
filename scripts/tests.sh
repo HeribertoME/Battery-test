@@ -1,8 +1,24 @@
-#!/bin/bash
+#!/usr/bin/env bash
 $ANDROID_HOME/emulator/emulator -avd FirstEmulator -wipe-data -port 5790 &
 EMULATOR_PID=$!
 
 $ANDROID_HOME/platform-tools/adb shell dumpsys batterystats --reset
+
+set PACKAGE_ID_PARAM="$1"
+set OS_TYPE_PARAM="$2"
+set TEST_TYPE_PARAM="$3"
+set TEST_TIME_PARAM=$4
+
+if [ "$PACKAGE_ID_PARAM" = "" ]; then
+  echo "PACKAGE ID NOT FOUND"
+  exit 1
+fi
+
+if [ "$OS_TYPE_PARAM" = "iOS" ]; then
+  echo "OS TYPE ID NOT YET SUPPORTED"
+  exit 1
+fi
+
 
 # Wait for Android to finish booting
 echo "Waiting for emulator to finish booting..."
@@ -18,15 +34,10 @@ echo "Emulator is ready for use"
 # Unlock the Lock Screen
 $ANDROID_HOME/platform-tools/adb shell input keyevent 82
 
-# Clear and capture logcat
+Clear and capture logcat
 $ANDROID_HOME/platform-tools/adb logcat -c
 $ANDROID_HOME/platform-tools/adb logcat > logcat.log &
 LOGCAT_PID=$!
-
-let PACKAGE_ID_PARAM=$1
-let OS_TYPE_PARAM=$2
-let TEST_TYPE_PARAM=$3
-let TEST_TIME_PARAM=$4
 
 
 if [ "$TEST_TYPE_PARAM" = "manual" ]; then
@@ -44,10 +55,9 @@ fi
 echo "Tests is running"
 echo "Generating batterystats"
 if [ "$TEST_TYPE_PARAM" = "manual" ]; then
-
   $ANDROID_HOME/platform-tools/adb shell dumpsys batterystats ${PACKAGE_ID_PARAM} > ${WORKSPACE}/batterystats.txt
 else
-  $ANDROID_HOME/platform-tools/adb shell dumpsys batterystats ${PACKAGE_ID_PARAM%.test} > ${WORKSPACE}/batterystats.txt
+  $ANDROID_HOME/platform-tools/adb shell dumpsys batterystats "${PACKAGE_ID_PARAM}.test" > ${WORKSPACE}/batterystats.txt
 fi
 
 $ANDROID_HOME/platform-tools/adb bugreport ${WORKSPACE}/bugreport.zip
