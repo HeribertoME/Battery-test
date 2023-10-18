@@ -7,7 +7,6 @@ uIdTotal = 0.0
 uIdNamesList = []
 uIdValuesList = []
 doc= open("results.txt","w+")
-#fileName= 'batterylogsPhysical.txt'
 fileName= 'batterylogs.txt'
 package= "com.example.batterytestapplication"
 

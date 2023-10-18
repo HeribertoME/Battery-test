@@ -5,27 +5,27 @@ set PIVOT_PARAM=$2
 set STAGE_SUCCESS="true"
 
 cd ${WORKSPACE}
-filename='batterystats.txt'
-n=1
 
-while read line; do
+#filename='batterystats.txt'
+#n=1
 
-    if [[ $line == *"Estimated power use"* ]]; then
-        echo -e "\033[34mLine No. $n : $line\033[0m"
-    fi
+# while read line; do
 
-    if [[ $line == *"Total cpu time"* ]]; then
-        echo -e "\033[34mLine No. $n : $line\033[0m"
-    fi
+#     if [[ $line == *"Estimated power use"* ]]; then
+#         echo -e "\033[34mLine No. $n : $line\033[0m"
+#     fi
 
-    if [[ $line == *"Proc"* ]]; then
-        echo -e "\033[34mLine No. $n : $line\033[0m"
-    fi
+#     if [[ $line == *"Total cpu time"* ]]; then
+#         echo -e "\033[34mLine No. $n : $line\033[0m"
+#     fi
 
-    n=$((n+1))
+#     if [[ $line == *"Proc"* ]]; then
+#         echo -e "\033[34mLine No. $n : $line\033[0m"
+#     fi
 
-done < "$filename"
+#     n=$((n+1))
 
+# done < "$filename"
 
 if [["$STRICT_MODE_PARAM" = "true" && "$STAGE_SUCCESS" = "true" ]]; then
   echo "OPTIMAL ENERGY SUCCESS WITH STRICT MODE"
@@ -46,3 +46,5 @@ if [["$STRICT_MODE_PARAM" = "false" && "$STAGE_SUCCESS" = "false" ]]; then
   echo "OPTIMAL ENERGY SUCCESS WITHOUT STRICT MODE"
   exit 0
 fi
+
+python3 "scripts/readit.py"
