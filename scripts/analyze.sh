@@ -2,7 +2,7 @@
 
 set STRICT_MODE_PARAM="$1"
 set PIVOT_PARAM=$2
-set STAGE_SUCCESS="true"
+STAGE_SUCCESS="true"
 
 cd ${WORKSPACE}
 filename='batterystats.txt'
@@ -27,22 +27,22 @@ while read line; do
 done < "$filename"
 
 
-if [["$STRICT_MODE_PARAM" = "true" && "$STAGE_SUCCESS" = "true" ]]; then
+if [ "$STRICT_MODE_PARAM" = "true" ] && [ "$STAGE_SUCCESS" = "true" ]; then
   echo "OPTIMAL ENERGY SUCCESS WITH STRICT MODE"
   exit 0
 fi
 
-if [["$STRICT_MODE_PARAM" = "true" && "$STAGE_SUCCESS" = "false" ]]; then
+if [ "$STRICT_MODE_PARAM" = "true" ] && [ "$STAGE_SUCCESS" == "false" ]; then
   echo "OPTIMAL ENERGY UNSUCCESS WITH STRICT MODE"
   exit 1
 fi
 
-if [["$STRICT_MODE_PARAM" = "false" && "$STAGE_SUCCESS" = "true" ]]; then
+if [ "$STRICT_MODE_PARAM" = "false" ] && [ "$STAGE_SUCCESS" = "true" ]; then
   echo "OPTIMAL ENERGY SUCCESS WITHOUT STRICT MODE"
   exit 0
 fi
 
-if [["$STRICT_MODE_PARAM" = "false" && "$STAGE_SUCCESS" = "false" ]]; then
+if [ "$STRICT_MODE_PARAM" = "false" ] && [ "$STAGE_SUCCESS" = "false" ]; then
   echo "OPTIMAL ENERGY SUCCESS WITHOUT STRICT MODE"
   exit 0
 fi
