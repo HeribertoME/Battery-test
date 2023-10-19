@@ -2,10 +2,10 @@
 
 echo "start test"
 echo "$ANDROID_SDK/emulator/emulator"
-/Users/omar.marin/Library/Android/sdk/emulator/emulator -avd FirstEmulator -wipe-data -port 5790 &
+$ANDROID_SDK/emulator/emulator -avd FirstEmulator -wipe-data -port 5790 &
 EMULATOR_PID=$!
 
-/Users/omar.marin/Library/Android/sdk/platform-tools/adb shell dumpsys batterystats --reset
+$ANDROID_HOME/platform-tools/adb shell dumpsys batterystats --reset
 
 set PACKAGE_ID_PARAM="$1"
 set OS_TYPE_PARAM="$2"
