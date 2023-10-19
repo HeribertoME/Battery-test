@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-cd ${WORKSPACE}
+
 echo "start test"
-echo "$WORKSPACE$ANDROID_HOME/emulator/emulator"
-$WORKSPACE$ANDROID_HOME/emulator/emulator -avd FirstEmulator -wipe-data -port 5790 &
+echo "$ANDROID_SDK/emulator/emulator"
+$ANDROID_SDK/emulator/emulator -avd FirstEmulator -wipe-data -port 5790 &
 EMULATOR_PID=$!
 
 $ANDROID_HOME/platform-tools/adb shell dumpsys batterystats --reset
