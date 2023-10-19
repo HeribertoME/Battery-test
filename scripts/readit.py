@@ -7,8 +7,7 @@ uIdTotal = 0.0
 uIdNamesList = []
 uIdValuesList = []
 doc= open("results.txt","w+")
-fileName= 'batterylogs.txt'
-package= "com.example.batterytestapplication"
+fileName= 'batterystats.txt'
 
 def checkIsTypePhysical():
     with open(fileName) as file:
@@ -88,21 +87,16 @@ with open(fileName) as file:
 
                 for i in range(1,len(cildrenArr)-1):
                     segment= cildrenArr[i].strip()
-                    print(segment)
                     if '=' in segment:
                         cutSegment= re.split(' |=',segment)
                     elif ':' in segment:
                         cutSegment= re.split(':',segment)
                     
-                    print("seg",cutSegment)
                     for i in range(0,len(cutSegment)):
                         modulo = i % 2
-                        print("modulo",modulo)
                         if modulo == 0:
-                            print("con 0",cutSegment[i])
                             uIdNamesList.append(cutSegment[i])
                         else:
-                            print("con 1",cutSegment[i])
                             uIdValuesList.append(cutSegment[i])
 
 #Empieza a escribir .txt
@@ -115,6 +109,7 @@ while i <= len(uIdNamesList) - 1:
     
     createLine = "  - ",str(uIdNamesList[i]), " ", str(uIdValuesList[i]), " \r\n"
     doc.writelines(createLine)
+    print(createLine)
     i += 1
 
 #tabFull = tabulate(tableNames,["Campos","Valor"])
