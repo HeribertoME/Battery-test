@@ -49,7 +49,7 @@ pipeline {
             echo "********************************************************"
             echo "*                                                      *"
             echo "*          🧪 Iniciando las pruebas 🧪                  *"
-            echo "*                                                      *"
+            echo "*  ${WORKSPACE}/scripts/tests.sh ${PACKAGE_ID_PARAM} ${OS_TYPE_PARAM} ${TEST_TYPE_PARAM} ${TEST_TIME_PARAM} ${STRICT_MODE_PARAM} ${PIVOT_PARAM}                                                    *"
             echo "********************************************************"
             ${WORKSPACE}/gradlew build
           '''
