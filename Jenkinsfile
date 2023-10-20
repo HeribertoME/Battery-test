@@ -42,6 +42,23 @@ pipeline {
 
     }
 
+    stage ('Test') {
+        steps {
+          sh '''
+            set
+            echo "********************************************************"
+            echo "*                                                      *"
+            echo "*          🧪 Iniciando las pruebas 🧪                  *"
+            echo "*                                                      *"
+            echo "********************************************************"
+            ${WORKSPACE}/gradlew build
+          '''
+          script {
+              compileAndroid = sh (script: 'bash ${WORKSPACE}/scripts/tests.sh ${PACKAGE_ID_PARAM} ${OS_TYPE_PARAM} ${TEST_TYPE_PARAM} ${TEST_TIME_PARAM} ${STRICT_MODE_PARAM} ${PIVOT_PARAM}')
+          }
+      }
+    }
+    
     stage('Analize battery stats') {
       steps {
         sh '''
