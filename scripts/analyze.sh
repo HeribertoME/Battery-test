@@ -4,7 +4,15 @@ PIVOT_PARAM="$2"
 STAGE_SUCCESS="$3"
 TOTAL_ENERGY_CONSUMPTION="$4"
 
+IS_OPTIMAL="false"
+
 cd ${WORKSPACE}
+
+if [ $(bc <<< "$TOTAL_ENERGY_CONSUMPTION <= $PIVOT_PARAM") -eq 1 ];then
+  set IS_OPTIMAL = "true"
+else
+  set IS_OPTIMAL = "false"
+fi
 
 echo "Total de gasto energetico => $TOTAL_ENERGY_CONSUMPTION"
 
