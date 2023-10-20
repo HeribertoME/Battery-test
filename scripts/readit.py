@@ -26,10 +26,10 @@ def checkIsTypePhysical():
             line = file.readline()
             if not line:
                 return False
-            
+
             if sUID.lower() in line.lower() and ("fg" in line or "bg" in line):#Physic
                 return True
-            
+
     return False
 
 def getIdPackage():
@@ -39,7 +39,7 @@ def getIdPackage():
         n= 0
         while True:
             line = file.readline()
-            
+
             if not line:
                 break
             if "  " in line and "   " not in line:
@@ -48,8 +48,8 @@ def getIdPackage():
                 temporal.append(arrT)
                 if arrT == "1000":
                     indexId = n
-    
-    return temporal[indexId]         
+
+    return temporal[indexId]
 
 try:
     isPhysical= checkIsTypePhysical()
@@ -74,10 +74,10 @@ try:
                 for i in range(1,len(mainData)):
                     if ":" in mainData[i] :
                         uIdNamesList.append(mainData[i])
-                        
+
                     else:
                         uIdValuesList.append(mainData[i])
-                
+
                 #manage data child
                 if isPhysical == True:
                     childData = line[indexChilds+1: len(line)-1 ]
@@ -92,10 +92,10 @@ try:
                         firstName = segment[0:indexSegment]
                         uIdValuesList.append(firstName)
                         uIdNamesList.append(nextValue)
-                        
+
                     uIdValuesList.append(cildrenArr[len(cildrenArr)-1])
                 else:
-                    cildrenArr = re.split('[(]|[)]',line)                    
+                    cildrenArr = re.split('[(]|[)]',line)
 
                     for i in range(1,len(cildrenArr)-1):
                         segment= cildrenArr[i].strip()
@@ -103,7 +103,7 @@ try:
                             cutSegment= re.split(' |=',segment)
                         elif ':' in segment:
                             cutSegment= re.split(':',segment)
-                        
+
                         for i in range(0,len(cutSegment)):
                             modulo = i % 2
                             if modulo == 0:
@@ -120,7 +120,7 @@ try:
         #tableNames.append(row)
         createLine = "  - ",str(uIdNamesList[i]), " ", str(uIdValuesList[i]), " \r\n"
         doc.writelines(createLine)
-        i += 1    
+        i += 1
 
     doc.close()
     #tabFull = tabulate(tableNames,["Campos","Valor"])
@@ -136,9 +136,8 @@ try:
         STAGE_SUCCESS=0
 except:
       STAGE_SUCCESS=0
-      
-subprocess.run(["sh", '/Users/omar.marin/dev/implementacion/Battery-test/scripts/analyze.sh',
+
+subprocess.run(["sh", WORKSPACE+'/scripts/analyze.sh',
                 STRICT_MODE_PARAM,PIVOT_PARAM,
                 str(STAGE_SUCCESS),
                 TOTAL_ENERGY_CONSUMPTION])
-    

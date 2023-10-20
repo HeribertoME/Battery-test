@@ -25,6 +25,6 @@ if [ "$STRICT_MODE_PARAM" = "false" ] && [ "$STAGE_SUCCESS" = "1" ]; then
 fi
 
 if [ "$STRICT_MODE_PARAM" = "false" ] && [ "$STAGE_SUCCESS" = "0" ]; then
-  echo "OPTIMAL ENERGY SUCCESS WITHOUT STRICT MODE"
+  echo "OPTIMAL ENERGY UNSUCCESS WITH STRICT MODE"
   exit 0
 fi
