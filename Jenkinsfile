@@ -19,9 +19,13 @@ pipeline {
         description: '',
         name: 'STRICT_MODE_PARAM')
     string (
-        defaultValue: '2',
+        defaultValue: '50',
         description: '',
         name: 'PIVOT_PARAM')
+    string (
+        defaultValue: '',
+        description: '',
+        name: 'PACKAGE_ID_PARAM')
 
   }
 
