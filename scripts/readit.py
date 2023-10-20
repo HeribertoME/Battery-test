@@ -4,14 +4,13 @@ import sys
 #from tabulate import tabulate
 
 WORKSPACE= sys.argv[1]
-PACKAGE_ID_PARAM=sys.argv[2]
-OS_TYPE_PARAM=sys.argv[3]
-TEST_TYPE_PARAM=sys.argv[4]
-TEST_TIME_PARAM=sys.argv[5]
-STRICT_MODE_PARAM=sys.argv[6]
-PIVOT_PARAM=sys.argv[7]
+OS_TYPE_PARAM=sys.argv[2]
+TEST_TYPE_PARAM=sys.argv[3]
+TEST_TIME_PARAM=sys.argv[4]
+STRICT_MODE_PARAM=sys.argv[5]
+PIVOT_PARAM=sys.argv[6]
 STAGE_SUCCESS=0
-TOTAL_ENERGY_CONSUMPTION=492
+TOTAL_ENERGY_CONSUMPTION=0
 
 sCapacity = 'Capacity'
 sUID = 'Uid'
