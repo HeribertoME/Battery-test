@@ -51,8 +51,6 @@ pipeline {
           echo "*   🔋 Iniciando el análisis del consumo de batería 🔋    *"
           echo "*                                                        *"
           echo "**********************************************************"
-          CMD ${WORKSPACE}/scripts/readit.py ${WORKSPACE} ${OS_TYPE_PARAM} ${TEST_TYPE_PARAM} ${TEST_TIME_PARAM} ${STRICT_MODE_PARAM} ${PIVOT_PARAM}
-          sleep 10
         '''
 
         script {
