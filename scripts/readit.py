@@ -129,6 +129,11 @@ try:
     if uIdValuesList[0]:
         STAGE_SUCCESS=1
         TOTAL_ENERGY_CONSUMPTION= uIdValuesList[0]
+
+    if TOTAL_ENERGY_CONSUMPTION <= PIVOT_PARAM:
+        STAGE_SUCCESS=1
+    else:
+        STAGE_SUCCESS=0
 except:
       STAGE_SUCCESS=0
       
