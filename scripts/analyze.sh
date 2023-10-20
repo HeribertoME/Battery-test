@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-
-set STRICT_MODE_PARAM="$1"
-set PIVOT_PARAM=$2
-STAGE_SUCCESS="true"
+STRICT_MODE_PARAM="$1"
+PIVOT_PARAM="$2"
+STAGE_SUCCESS="$3"
+TOTAL_ENERGY_CONSUMPTION="$4"
 
 cd ${WORKSPACE}
 
@@ -27,24 +27,24 @@ cd ${WORKSPACE}
 
 # done < "$filename"
 
-if [ "$STRICT_MODE_PARAM" = "true" ] && [ "$STAGE_SUCCESS" = "true" ]; then
+echo "Total de gasto energetico => $TOTAL_ENERGY_CONSUMPTION"
+
+if [ "$STRICT_MODE_PARAM" = "true" ] && [ "$STAGE_SUCCESS" = "1" ]; then
   echo "OPTIMAL ENERGY SUCCESS WITH STRICT MODE"
   exit 0
 fi
 
-if [ "$STRICT_MODE_PARAM" = "true" ] && [ "$STAGE_SUCCESS" == "false" ]; then
+if [ "$STRICT_MODE_PARAM" = "true" ] && [ "$STAGE_SUCCESS" == "0" ]; then
   echo "OPTIMAL ENERGY UNSUCCESS WITH STRICT MODE"
   exit 1
 fi
 
-if [ "$STRICT_MODE_PARAM" = "false" ] && [ "$STAGE_SUCCESS" = "true" ]; then
+if [ "$STRICT_MODE_PARAM" = "false" ] && [ "$STAGE_SUCCESS" = "1" ]; then
   echo "OPTIMAL ENERGY SUCCESS WITHOUT STRICT MODE"
   exit 0
 fi
 
-if [ "$STRICT_MODE_PARAM" = "false" ] && [ "$STAGE_SUCCESS" = "false" ]; then
+if [ "$STRICT_MODE_PARAM" = "false" ] && [ "$STAGE_SUCCESS" = "0" ]; then
   echo "OPTIMAL ENERGY SUCCESS WITHOUT STRICT MODE"
   exit 0
 fi
-
-python3 "scripts/readit.py"

@@ -1,5 +1,17 @@
 import re
+import subprocess
+import sys
 #from tabulate import tabulate
+
+WORKSPACE= sys.argv[1]
+PACKAGE_ID_PARAM=sys.argv[2]
+OS_TYPE_PARAM=sys.argv[3]
+TEST_TYPE_PARAM=sys.argv[4]
+TEST_TIME_PARAM=sys.argv[5]
+STRICT_MODE_PARAM=sys.argv[6]
+PIVOT_PARAM=sys.argv[7]
+STAGE_SUCCESS=0
+TOTAL_ENERGY_CONSUMPTION=492
 
 sCapacity = 'Capacity'
 sUID = 'Uid'
@@ -109,10 +121,19 @@ while i <= len(uIdNamesList) - 1:
     
     createLine = "  - ",str(uIdNamesList[i]), " ", str(uIdValuesList[i]), " \r\n"
     doc.writelines(createLine)
-    print(createLine)
-    i += 1
+    #print(createLine)
+    i += 1    
 
+STAGE_SUCCESS=1
+TOTAL_ENERGY_CONSUMPTION= uIdValuesList[0]
+#print(TOTAL_ENERGY_CONSUMPTION)
 #tabFull = tabulate(tableNames,["Campos","Valor"])
 #print(tabFull)
 #doc.writelines(tabFull)
 doc.close()
+sCMD= '/'+WORKSPACE+'/scripts/analyze.sh'
+#sCMD= "/Users/omar.marin/dev/implementacion/Battery-test/scripts/analyze.sh"
+print("CMD => ",sCMD)
+completed_process = subprocess.run(["sh", sCMD,STRICT_MODE_PARAM,PIVOT_PARAM,str(STAGE_SUCCESS),TOTAL_ENERGY_CONSUMPTION])
+
+    

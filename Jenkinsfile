@@ -72,7 +72,7 @@ pipeline {
         '''
 
         script {
-              buildFile = sh (script: 'python3 ${WORKSPACE}/scripts/readit.py')
+              buildFile = sh (script: 'python3 ${WORKSPACE}/scripts/readit.py ${WORKSPACE} ${PACKAGE_ID_PARAM} ${OS_TYPE_PARAM} ${TEST_TYPE_PARAM} ${TEST_TIME_PARAM} ${STRICT_MODE_PARAM} ${PIVOT_PARAM}')
         }
       }
     }
