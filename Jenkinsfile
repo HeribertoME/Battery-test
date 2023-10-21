@@ -19,9 +19,13 @@ pipeline {
         description: '',
         name: 'STRICT_MODE_PARAM')
     string (
-        defaultValue: '2',
+        defaultValue: '50',
         description: '',
         name: 'PIVOT_PARAM')
+    string (
+        defaultValue: '',
+        description: '',
+        name: 'PACKAGE_ID_PARAM')
 
   }
 
@@ -58,7 +62,7 @@ pipeline {
           }
       }
     }
-
+    
     stage('Analize battery stats') {
       steps {
         sh '''
@@ -68,10 +72,10 @@ pipeline {
           echo "*   🔋 Iniciando el análisis del consumo de batería 🔋    *"
           echo "*                                                        *"
           echo "**********************************************************"
-          sleep 10
         '''
+
         script {
-              analizeBattery = sh (script: 'bash ${WORKSPACE}/scripts/analyze.sh')
+              buildFile = sh (script: 'python3 ${WORKSPACE}/scripts/readit.py ${WORKSPACE} ${OS_TYPE_PARAM} ${TEST_TYPE_PARAM} ${TEST_TIME_PARAM} ${STRICT_MODE_PARAM} ${PIVOT_PARAM}')
         }
       }
     }
