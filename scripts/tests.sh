@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
-$ANDROID_HOME/emulator/emulator -avd FirstEmulator -wipe-data -port 5790 &
-EMULATOR_PID=$!
+#$ANDROID_HOME/emulator/emulator -avd FirstEmulator -wipe-data -port 5790 &
+#EMULATOR_PID=$!
 
-$ANDROID_HOME/platform-tools/adb shell dumpsys batterystats --reset
+# Steps to connect via adb ton emulator
+$ANDROID_HOME/platform-tools/adb devices
+$ANDROID_HOME/platform-tools/adb connect 34.172.173.43:5555
+$ANDROID_HOME/platform-tools/adb devices
 
 set PACKAGE_ID_PARAM="$1"
 set OS_TYPE_PARAM="$2"
@@ -22,15 +25,17 @@ fi
 
 # Wait for Android to finish booting
 echo "Waiting for emulator to finish booting..."
-WAIT_CMD=$($ANDROID_HOME/platform-tools/adb -s emulator-5790 wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82')
+WAIT_CMD=$($ANDROID_HOME/platform-tools/adb -s 34.172.173.43:5555 wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82') # Emulator http://34.172.173.43:6080/
 until $WAIT_CMD; do
- sleep 1
+  echo "Still waiting for emulator to finish booting..."
+  sleep 1
 done
 
-echo "Emulator reported that the startup process is $EMULATOR_STATUS"
+#echo "Emulator reported that the startup process is $EMULATOR_STATUS"
 sleep 10
 
 echo "Emulator is ready for use"
+$ANDROID_HOME/platform-tools/adb shell dumpsys batterystats --reset
 # Unlock the Lock Screen
 $ANDROID_HOME/platform-tools/adb shell input keyevent 82
 
@@ -64,4 +69,4 @@ $ANDROID_HOME/platform-tools/adb bugreport ${WORKSPACE}/bugreport.zip
 
 # Stop the background processes
 kill $LOGCAT_PID
-kill $EMULATOR_PID
+#kill $EMULATOR_PID
