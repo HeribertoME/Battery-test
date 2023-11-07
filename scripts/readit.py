@@ -9,6 +9,7 @@ TEST_TYPE_PARAM=sys.argv[3]
 TEST_TIME_PARAM=sys.argv[4]
 STRICT_MODE_PARAM=sys.argv[5]
 PIVOT_PARAM=sys.argv[6]
+PACKAGE_ID_PARAM= sys.argv[7]
 STAGE_SUCCESS=0
 TOTAL_ENERGY_CONSUMPTION=0
 
@@ -51,21 +52,20 @@ def getIdPackage():
 
     return temporal[indexId]
 
-try:
-    isPhysical= checkIsTypePhysical()
-    appID= getIdPackage()
-
+def getEnergyStats():
     with open(fileName) as file:
         while True:
             line = file.readline()
             if not line:
                 break
+            #Obtener Capacidades
             if sCapacity in line:
                 capData = re.split(",|:",line)
                 lineCap1 = "Capacidad de batería "+ capData[1].strip().lstrip()+ " mAh\r\n"
                 lineCap2 = "Batería drenada por procesos "+ capData[3].strip().lstrip()+ " mAh\r\n\r\n"
                 doc.writelines([lineCap1,lineCap2])
 
+            #Obtener Energia usada
             if "uid "+appID in line.lower():
                 line = line.strip()
                 indexChilds = line.index('(')
@@ -111,8 +111,35 @@ try:
                             else:
                                 uIdValuesList.append(cutSegment[i])
 
-    #Empieza a escribir .txt
-    #tableNames = []
+def getCPUStats():
+    #Obtener Uso de CPU
+    with open(fileName) as file:
+        lines = file.readlines()
+    
+    cpuRow = ""
+    n = 0
+    for line in lines:
+        if PACKAGE_ID_PARAM in line:
+            cpuRow = lines[n+1].strip()
+        n+=1
+    
+    
+    arrData = re.split(':|[+]|;',cpuRow)
+
+    for i in  range(1,len(arrData)):
+        value = re.split(' ',arrData[i])
+        uIdValuesList.append(value[1])
+    
+    uIdNamesList.append("CPU: Tiempo de usuario")
+    uIdNamesList.append("CPU: Tiempo del sistema")
+    uIdNamesList.append("CPU: Tiempo del primer plano")
+
+try:
+    isPhysical= checkIsTypePhysical()
+    appID= getIdPackage()
+    getEnergyStats() 
+    getCPUStats()
+
 
     i = 0
     while i <= len(uIdNamesList) - 1:
