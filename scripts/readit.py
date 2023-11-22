@@ -8,8 +8,7 @@ OS_TYPE_PARAM=sys.argv[2]
 TEST_TYPE_PARAM=sys.argv[3]
 TEST_TIME_PARAM=sys.argv[4]
 STRICT_MODE_PARAM=sys.argv[5]
-PIVOT_PARAM=sys.argv[6]
-PACKAGE_ID_PARAM= sys.argv[7]
+APP_TYPE_PARAM=sys.argv[6]
 STAGE_SUCCESS=0
 TOTAL_ENERGY_CONSUMPTION=0
 
@@ -20,6 +19,25 @@ uIdNamesList = []
 uIdValuesList = []
 doc= open("results.txt","w+")
 fileName= 'batterystats.txt'
+
+#STREAMING, BANKING, DELIVERY, ECOMMERCE, SOCIAL, VIDEOGAME  com.example.batterytestapplication
+
+PIVOT_PARAM = 0
+
+if APP_TYPE_PARAM == "STREAMING":
+    PIVOT_PARAM = float(0.003812)
+elif APP_TYPE_PARAM == "BANKING":
+    PIVOT_PARAM = float(0.001093)
+elif APP_TYPE_PARAM == "DELIVERY":
+    PIVOT_PARAM = float(0.002871)
+elif APP_TYPE_PARAM == "ECOMMERCE":
+    PIVOT_PARAM = float(0.003812)
+elif APP_TYPE_PARAM == "SOCIAL":
+    PIVOT_PARAM = float(0.0030179)
+elif APP_TYPE_PARAM == "VIDEOGAME":
+    PIVOT_PARAM = float(0.0050179)
+else:
+    PIVOT_PARAM = 0
 
 def checkIsTypePhysical():
     with open(fileName) as file:
@@ -52,20 +70,21 @@ def getIdPackage():
 
     return temporal[indexId]
 
-def getEnergyStats():
+try:
+    isPhysical= checkIsTypePhysical()
+    appID= getIdPackage()
+
     with open(fileName) as file:
         while True:
             line = file.readline()
             if not line:
                 break
-            #Obtener Capacidades
             if sCapacity in line:
                 capData = re.split(",|:",line)
                 lineCap1 = "Capacidad de batería "+ capData[1].strip().lstrip()+ " mAh\r\n"
                 lineCap2 = "Batería drenada por procesos "+ capData[3].strip().lstrip()+ " mAh\r\n\r\n"
                 doc.writelines([lineCap1,lineCap2])
 
-            #Obtener Energia usada
             if "uid "+appID in line.lower():
                 line = line.strip()
                 indexChilds = line.index('(')
@@ -111,35 +130,8 @@ def getEnergyStats():
                             else:
                                 uIdValuesList.append(cutSegment[i])
 
-def getCPUStats():
-    #Obtener Uso de CPU
-    with open(fileName) as file:
-        lines = file.readlines()
-    
-    cpuRow = ""
-    n = 0
-    for line in lines:
-        if PACKAGE_ID_PARAM in line:
-            cpuRow = lines[n+1].strip()
-        n+=1
-    
-    
-    arrData = re.split(':|[+]|;',cpuRow)
-
-    for i in  range(1,len(arrData)):
-        value = re.split(' ',arrData[i])
-        uIdValuesList.append(value[1])
-    
-    uIdNamesList.append("CPU: Tiempo de usuario")
-    uIdNamesList.append("CPU: Tiempo del sistema")
-    uIdNamesList.append("CPU: Tiempo del primer plano")
-
-try:
-    isPhysical= checkIsTypePhysical()
-    appID= getIdPackage()
-    getEnergyStats() 
-    getCPUStats()
-
+    #Empieza a escribir .txt
+    #tableNames = []
 
     i = 0
     while i <= len(uIdNamesList) - 1:
@@ -157,19 +149,14 @@ try:
         STAGE_SUCCESS=1
         TOTAL_ENERGY_CONSUMPTION= uIdValuesList[0]
 
-    if TOTAL_ENERGY_CONSUMPTION <= PIVOT_PARAM:
+    if float(TOTAL_ENERGY_CONSUMPTION) <= PIVOT_PARAM:
         STAGE_SUCCESS=1
     else:
         STAGE_SUCCESS=0
 except:
       STAGE_SUCCESS=0
 
-try:
-    subprocess.run(["sh", WORKSPACE+'/scripts/analyze.sh',
-                    str(STRICT_MODE_PARAM),
-                    str(PIVOT_PARAM),
-                    str(STAGE_SUCCESS),
-                    str(TOTAL_ENERGY_CONSUMPTION)])
-except:
-    print("Exception on code")
-
+subprocess.run(["sh", WORKSPACE+'/scripts/analyze.sh',
+                STRICT_MODE_PARAM,
+                str(STAGE_SUCCESS),
+                TOTAL_ENERGY_CONSUMPTION])

@@ -7,6 +7,10 @@ pipeline {
         description: 'Selection to OS',
         name: 'OS_TYPE_PARAM')
     choice(
+        choices: ['STREAMING', 'BANKING', 'DELIVERY', 'ECOMMERCE', 'SOCIAL', 'VIDEOGAME'],
+        description: 'Selection to OS',
+        name: 'APP_TYPE_PARAM')
+    choice(
         choices: ['manual', 'automated'],
         description: 'Selection to make tests',
         name: 'TEST_TYPE_PARAM')
@@ -18,10 +22,6 @@ pipeline {
         defaultValue: 'false',
         description: '',
         name: 'STRICT_MODE_PARAM')
-    string (
-        defaultValue: '50',
-        description: '',
-        name: 'PIVOT_PARAM')
     string (
         defaultValue: '',
         description: '',
@@ -58,11 +58,11 @@ pipeline {
             ${WORKSPACE}/gradlew build
           '''
           script {
-              compileAndroid = sh (script: 'bash ${WORKSPACE}/scripts/tests.sh ${PACKAGE_ID_PARAM} ${OS_TYPE_PARAM} ${TEST_TYPE_PARAM} ${TEST_TIME_PARAM} ${STRICT_MODE_PARAM} ${PIVOT_PARAM}')
+              compileAndroid = sh (script: 'bash ${WORKSPACE}/scripts/tests.sh ${PACKAGE_ID_PARAM} ${OS_TYPE_PARAM} ${TEST_TYPE_PARAM} ${TEST_TIME_PARAM} ${STRICT_MODE_PARAM} ${APP_TYPE_PARAM}')
           }
       }
     }
-    
+
     stage('Analize battery stats') {
       steps {
         sh '''
@@ -72,10 +72,11 @@ pipeline {
           echo "*   🔋 Iniciando el análisis del consumo de batería 🔋    *"
           echo "*                                                        *"
           echo "**********************************************************"
+          sleep 10
         '''
 
         script {
-              buildFile = sh (script: 'python3 ${WORKSPACE}/scripts/readit.py ${WORKSPACE} ${OS_TYPE_PARAM} ${TEST_TYPE_PARAM} ${TEST_TIME_PARAM} ${STRICT_MODE_PARAM} ${PIVOT_PARAM} ${PACKAGE_ID_PARAM}')
+              buildFile = sh (script: 'python3 ${WORKSPACE}/scripts/readit.py ${WORKSPACE} ${OS_TYPE_PARAM} ${TEST_TYPE_PARAM} ${TEST_TIME_PARAM} ${STRICT_MODE_PARAM} ${APP_TYPE_PARAM}')
         }
       }
     }
