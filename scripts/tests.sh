@@ -23,7 +23,7 @@ fi
 
 # Wait for Android to finish booting
 echo "Waiting for emulator to finish booting..."
-WAIT_CMD=$($ANDROID_HOME/platform-tools/adb -s FirstEmulator-6080 wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82')
+WAIT_CMD=$($ANDROID_HOME/platform-tools/adb -s localhost:6080 wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82')
 until $WAIT_CMD; do
  sleep 1
 done
