@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "Emulator start booting..."
-$ANDROID_HOME/emulator/emulator -avd FirstEmulator -wipe-data -port 5790 &
+$ANDROID_HOME/emulator/emulator -avd FirstEmulator -wipe-data -port 6080 &
 EMULATOR_PID=$!
 
 $ANDROID_HOME/platform-tools/adb shell dumpsys batterystats --reset
