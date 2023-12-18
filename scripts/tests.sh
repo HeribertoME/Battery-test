@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 echo "Emulator start booting..."
-$ANDROID_HOME/emulator/emulator -avd emulator_12.0 -no-window -wipe-data -port 6080 &
+#$ANDROID_HOME/emulator/emulator -avd emulator_12.0 -no-window -wipe-data -port 6080 &
 EMULATOR_PID=$!
 
-$ANDROID_HOME/platform-tools/adb shell dumpsys batterystats --reset
+#$ANDROID_HOME/platform-tools/adb shell dumpsys batterystats --reset
 
 set PACKAGE_ID_PARAM="$1"
 set OS_TYPE_PARAM="$2"
@@ -23,7 +23,7 @@ fi
 
 # Wait for Android to finish booting
 echo "Waiting for emulator to finish booting..."
-WAIT_CMD=$($ANDROID_HOME/platform-tools/adb -s 192.168.252.125:6080 wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82')
+WAIT_CMD=$($ANDROID_HOME/platform-tools/adb connect 192.168.252.125:5555 wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82')
 until $WAIT_CMD; do
  sleep 1
 done
