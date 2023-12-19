@@ -23,10 +23,8 @@ fi
 
 # Wait for Android to finish booting
 echo "Waiting for emulator to finish booting..."
-WAIT_CMD=$($ANDROID_HOME/emulator/emulator connect firstEmulator wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82')
-until $WAIT_CMD; do
- sleep 1
-done
+$ANDROID_HOME/emulator/emulator connect -avd firstEmulator
+
 
 echo "Emulator reported that the startup process is $EMULATOR_STATUS"
 sleep 10
