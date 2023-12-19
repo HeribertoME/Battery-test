@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "Emulator start booting..."
-$ANDROID_HOME/emulator/emulator -avd firstEmulator -no-window -wipe-data -port 6080 &
+$ANDROID_HOME/emulator/emulator -avd firstEmulator -noaudio -no-boot-anim -netdelay none -accel on -no-window -wipe-data -port 5557 &
 EMULATOR_PID=$!
 
 $ANDROID_HOME/platform-tools/adb shell dumpsys batterystats --reset
@@ -23,7 +23,7 @@ fi
 
 # Wait for Android to finish booting
 echo "Waiting for emulator to finish booting..."
-WAIT_CMD=$($ANDROID_HOME/platform-tools/adb connect firstEmulator wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82')
+WAIT_CMD=$($ANDROID_HOME/emulator/emulator connect firstEmulator wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82')
 until $WAIT_CMD; do
  sleep 1
 done
