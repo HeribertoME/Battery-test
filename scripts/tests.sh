@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "Emulator start booting..."
-$ANDROID_HOME/emulator/emulator -avd 192.168.252.125:5555 -wipe-data -port 5555 &
+$ANDROID_HOME/emulator/emulator 192.168.252.125:5555 -noaudio -no-boot-anim -netdelay none -accel on -no-window -wipe-data -port 5555 &
 EMULATOR_PID=$!
 
 $ANDROID_HOME/platform-tools/adb shell dumpsys batterystats --reset
