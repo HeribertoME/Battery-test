@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 echo "Emulator start booting..."
-$ANDROID_HOME/emulator/emulator -avd samsung_galaxy_s10_12.0 -noaudio -no-boot-anim -netdelay none -accel on -no-window -wipe-data -port 6080 &
+$ANDROID_HOME/emulator/emulator 192.168.252.125:5555 -noaudio -no-boot-anim -netdelay none -accel on -no-window -wipe-data -port 5555 &
 EMULATOR_PID=$!
 
 $ANDROID_HOME/platform-tools/adb shell dumpsys batterystats --reset
@@ -23,7 +23,7 @@ fi
 
 # Wait for Android to finish booting
 echo "Waiting for emulator to finish booting..."
-$ANDROID_HOME/emulator/emulator connect -avd samsung_galaxy_s10_12.0 wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'
+$ANDROID_HOME/emulator/emulator connect -avd 192.168.252.125:5555 wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'
 until $WAIT_CMD; do
  sleep 1
 done
