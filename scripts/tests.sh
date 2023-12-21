@@ -23,7 +23,7 @@ fi
 
 # Wait for Android to finish booting
 echo "Waiting for emulator to finish booting..."
-WAIT_CMD=$($ANDROID_HOME/platform-tools/adb -avd -s nexus_one_12.0 wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82')
+WAIT_CMD=$($ANDROID_HOME/emulator/emulator connect -avd -s 192.168.252.125:5555 wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82')
 until $WAIT_CMD; do
  sleep 1
 done
