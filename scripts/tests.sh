@@ -65,5 +65,5 @@ fi
 $ANDROID_HOME/platform-tools/adb bugreport ${WORKSPACE}/bugreport.zip
 
 # Stop the background processes
-kill $LOGCAT_PID
-kill $EMULATOR_PID
+#kill $LOGCAT_PID
+#kill $EMULATOR_PID
