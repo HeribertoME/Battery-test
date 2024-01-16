@@ -73,6 +73,7 @@ pipeline {
           echo "*                                                        *"
           echo "**********************************************************"
           sleep 10
+          apt install python3 -y
         '''
 
         script {
