@@ -34,8 +34,6 @@ pipeline {
     stage ('Build') {
         steps {
           sh '''
-            python3 --version
-            which python3
             set
             echo "********************************************************"
             echo "*                                                      *"
