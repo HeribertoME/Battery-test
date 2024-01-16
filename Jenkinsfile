@@ -34,7 +34,6 @@ pipeline {
     stage ('Build') {
         steps {
           sh '''
-           apt install python3 -y
             set
             echo "********************************************************"
             echo "*                                                      *"
