@@ -157,6 +157,6 @@ except:
       STAGE_SUCCESS=0
 
 subprocess.run(["sh", WORKSPACE+'/scripts/analyze.sh',
-                STRICT_MODE_PARAM,
+                str(STRICT_MODE_PARAM),
                 str(STAGE_SUCCESS),
-                TOTAL_ENERGY_CONSUMPTION])
+                str(TOTAL_ENERGY_CONSUMPTION)])
