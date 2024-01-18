@@ -6,7 +6,7 @@ TOTAL_ENERGY_CONSUMPTION="$4"
 
 cd ${WORKSPACE}
 
-echo "Pivot Param => $STAGE_SUCCESS"
+echo "Pivot Param => $PIVOT_PARAM"
 echo "Total de gasto energetico => $TOTAL_ENERGY_CONSUMPTION"
 
 if [ "$STRICT_MODE_PARAM" = "true" ] && [ "$STAGE_SUCCESS" = "1" ]; then
