@@ -14,7 +14,7 @@ if [ "$STRICT_MODE_PARAM" = "true" ] && [ "$STAGE_SUCCESS" = "1" ]; then
   exit 0
 fi
 
-if [ "$STRICT_MODE_PARAM" = "true" ] && [ "$STAGE_SUCCESS" == "0" ]; then
+if [ "$STRICT_MODE_PARAM" = "true" ] && [ "$STAGE_SUCCESS" = "0" ]; then
   echo "OPTIMAL ENERGY UNSUCCESS WITH STRICT MODE"
   exit 1
 fi

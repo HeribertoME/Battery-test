@@ -149,7 +149,7 @@ try:
         STAGE_SUCCESS=1
         TOTAL_ENERGY_CONSUMPTION= uIdValuesList[0]
 
-    if float(TOTAL_ENERGY_CONSUMPTION) <= PIVOT_PARAM:
+    if float(TOTAL_ENERGY_CONSUMPTION) <= float(PIVOT_PARAM):
         STAGE_SUCCESS=1
     else:
         STAGE_SUCCESS=0
