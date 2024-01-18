@@ -142,10 +142,9 @@ try:
         i += 1
 
     doc.close()
-    #tabFull = tabulate(tableNames,["Campos","Valor"])
-    #doc.writelines(tabFull)
+    tabFull = tabulate(tableNames,["Campos","Valor"])
+    doc.writelines(tabFull)
 
-    print("uIdValuesList: "+uIdValuesList[0])
     if uIdValuesList[0]:
         STAGE_SUCCESS=1
         TOTAL_ENERGY_CONSUMPTION= uIdValuesList[0]
