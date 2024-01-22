@@ -10,7 +10,7 @@ TEST_TIME_PARAM=sys.argv[4]
 STRICT_MODE_PARAM=sys.argv[5]
 APP_TYPE_PARAM=sys.argv[6]
 STAGE_SUCCESS=0
-TOTAL_ENERGY_CONSUMPTION=9
+TOTAL_ENERGY_CONSUMPTION=0
 
 sCapacity = 'Capacity'
 sUID = 'Uid'
@@ -142,8 +142,8 @@ try:
         i += 1
 
     doc.close()
-    tabFull = tabulate(tableNames,["Campos","Valor"])
-    doc.writelines(tabFull)
+    #tabFull = tabulate(tableNames,["Campos","Valor"])
+    #doc.writelines(tabFull)
 
     if uIdValuesList[0]:
         STAGE_SUCCESS=1
