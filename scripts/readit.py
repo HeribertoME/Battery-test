@@ -144,7 +144,7 @@ def getCPUStats():
 
     arrData = re.split(':|[+]|;',cpuRow)
 
-    for i in  range(1,len(arrData)):
+    for i in  range(0,len(arrData)):
         value = re.split(' ',arrData[i])
         uIdValuesList.append(value[0])
 
