@@ -146,7 +146,7 @@ def getCPUStats():
 
     for i in  range(1,len(arrData)):
         value = re.split(' ',arrData[i])
-        uIdValuesList.append(value[1])
+        uIdValuesList.append(value[0])
 
     uIdNamesList.append("CPU: Tiempo de usuario")
     uIdNamesList.append("CPU: Tiempo del sistema")
