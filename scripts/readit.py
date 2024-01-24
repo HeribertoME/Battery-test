@@ -161,15 +161,15 @@ try:
 
     i = 0
     while i <= len(uIdNamesList) - 1:
-        #row = [str(uIdNamesList[i]),str(uIdValuesList[i])]
-        #tableNames.append(row)
+        row = [str(uIdNamesList[i]),str(uIdValuesList[i])]
+        tableNames.append(row)
         createLine = "  - ",str(uIdNamesList[i]), " ", str(uIdValuesList[i]), " \r\n"
         doc.writelines(createLine)
         i += 1
 
     doc.close()
-    #tabFull = tabulate(tableNames,["Campos","Valor"])
-    #doc.writelines(tabFull)
+    tabFull = tabulate(tableNames,["Campos","Valor"])
+    doc.writelines(tabFull)
 
     if uIdValuesList[0]:
         STAGE_SUCCESS=1
