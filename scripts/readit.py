@@ -128,7 +128,6 @@ def getEnergyStats():
                                 uIdNamesList.append(cutSegment[i])
                             else:
                                 uIdValuesList.append(cutSegment[i])
-                                doc.writelines(cutSegment[i])
 
 def getCPUStats():
     #Obtener Uso de CPU
@@ -168,9 +167,10 @@ try:
         doc.writelines(createLine)
         i += 1
 
+    tabFull = tabulate(tableNames,["Campos","Valor"])
+    doc.writelines(tabFull)
     doc.close()
-    #tabFull = tabulate(tableNames,["Campos","Valor"])
-    #doc.writelines(tabFull)
+
 
     if uIdValuesList[0]:
         STAGE_SUCCESS=1
