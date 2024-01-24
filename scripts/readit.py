@@ -167,8 +167,8 @@ try:
         doc.writelines(createLine)
         i += 1
 
-    tabFull = tabulate(tableNames,["Campos","Valor"])
-    doc.writelines(tabFull)
+    #tabFull = tabulate(tableNames,["Campos","Valor"])
+    #doc.writelines(tabFull)
     doc.close()
 
 
