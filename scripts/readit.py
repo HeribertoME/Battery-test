@@ -176,9 +176,14 @@ try:
     if uIdValuesList[0]:
         STAGE_SUCCESS=1
         TOTAL_ENERGY_CONSUMPTION= uIdValuesList[0]
+        print("uIdValuesList PRESENT as: "+uIdValuesList[0])
+    else:
+        print("uIdValuesList NOT PRESENT")
 
-     if float(TOTAL_ENERGY_CONSUMPTION) <= float(PIVOT_PARAM):
+    if float(TOTAL_ENERGY_CONSUMPTION) <= float(PIVOT_PARAM):
         STAGE_SUCCESS=1
+    else:
+        STAGE_SUCCESS=0
 
     subprocess.run(["sh", WORKSPACE+'/scripts/analyze.sh',
                     str(STRICT_MODE_PARAM),
