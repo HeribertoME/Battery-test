@@ -9,6 +9,7 @@ TEST_TYPE_PARAM=sys.argv[3]
 TEST_TIME_PARAM=sys.argv[4]
 STRICT_MODE_PARAM=sys.argv[5]
 APP_TYPE_PARAM=sys.argv[6]
+PACKAGE_ID_PARAM = "com.example.batterytestapplication"
 STAGE_SUCCESS=0
 TOTAL_ENERGY_CONSUMPTION=0
 
@@ -167,8 +168,8 @@ try:
         doc.writelines(createLine)
         i += 1
 
-    tabFull = tabulate(tableNames,["Campos","Valor"])
-    doc.writelines(tabFull)
+    #tabFull = tabulate(tableNames,["Campos","Valor"])
+    #doc.writelines(tabFull)
     doc.close()
 
 
@@ -176,7 +177,7 @@ try:
         STAGE_SUCCESS=1
         TOTAL_ENERGY_CONSUMPTION= uIdValuesList[0]
 
-    if TOTAL_ENERGY_CONSUMPTION <= PIVOT_PARAM:
+     if float(TOTAL_ENERGY_CONSUMPTION) <= float(PIVOT_PARAM):
         STAGE_SUCCESS=1
     else:
         STAGE_SUCCESS=0
