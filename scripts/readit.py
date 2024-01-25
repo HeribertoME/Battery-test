@@ -184,13 +184,12 @@ try:
 except:
       STAGE_SUCCESS=0
 
-
-
 try:
     subprocess.run(["sh", WORKSPACE+'/scripts/analyze.sh',
                     str(STRICT_MODE_PARAM),
                     str(PIVOT_PARAM),
                     str(STAGE_SUCCESS),
                     str(TOTAL_ENERGY_CONSUMPTION)])
-except:
-    print("Exception on code")
+except Exception as error:
+      STAGE_SUCCESS=0
+      print('An exception occurred: {}'.format(error))
