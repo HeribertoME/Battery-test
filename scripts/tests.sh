@@ -51,7 +51,7 @@ if [ "$TEST_TYPE_PARAM" = "manual" ]; then
 else
   # Run automated tests
   ${WORKSPACE}/gradlew :app:connectedCheck :app:installDebug :app:installDebugAndroidTest
-  $ANDROID_HOME/platform-tools/adb shell am instrument -w com.example.batterytestapplication/android.support.test.runner.AndroidJUnitRunner
+  $ANDROID_HOME/platform-tools/adb -s 192.168.252.125:5555 shell am instrument -w com.example.batterytestapplication/android.support.test.runner.AndroidJUnitRunner
 fi
 
 # Generates battery stats file
