@@ -50,7 +50,10 @@ if [ "$TEST_TYPE_PARAM" = "manual" ]; then
   sleep $minutes
 else
   # Run automated tests
-  ${WORKSPACE}/gradlew :app:connectedCheck :app:installDebug :app:installDebugAndroidTest
+  ${WORKSPACE}/gradlew assembleDebug assembleDebugAndroidTest
+  $ANDROID_HOME/platform-tools/adb install -r app/build/outputs/apk/debug/app-debug.apk
+  $ANDROID_HOME/platform-tools/adb install app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+  #${WORKSPACE}/gradlew :app:connectedCheck :app:installDebug :app:installDebugAndroidTest
 fi
 
 # Generates battery stats file
