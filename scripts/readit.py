@@ -9,7 +9,7 @@ TEST_TYPE_PARAM=sys.argv[3]
 TEST_TIME_PARAM=sys.argv[4]
 STRICT_MODE_PARAM=sys.argv[5]
 APP_TYPE_PARAM=sys.argv[6]
-PACKAGE_ID_PARAM = "com.example.batterytestapplication"
+PACKAGE_ID_PARAM= sys.argv[7]
 STAGE_SUCCESS=0
 TOTAL_ENERGY_CONSUMPTION=0
 

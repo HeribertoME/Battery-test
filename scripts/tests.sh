@@ -50,7 +50,7 @@ if [ "$TEST_TYPE_PARAM" = "manual" ]; then
   sleep $minutes
 else
   # Run automated tests
-  ${WORKSPACE}/gradlew :app:connectedCheck :app:installDebugAndroidTest
+  ${WORKSPACE}/gradlew :app:connectedCheck :app:installDebug :app:installDebugAndroidTest
 fi
 
 # Generates battery stats file
