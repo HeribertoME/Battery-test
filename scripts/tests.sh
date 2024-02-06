@@ -62,7 +62,7 @@ echo "Generating batterystats"
 if [ "$TEST_TYPE_PARAM" = "manual" ]; then
   $ANDROID_HOME/platform-tools/adb -s 192.168.252.125:5555 shell dumpsys batterystats ${PACKAGE_ID_PARAM} > ${WORKSPACE}/batterystats.txt
 else
-  $ANDROID_HOME/platform-tools/adb -s 192.168.252.125:5555 shell dumpsys batterystats "${PACKAGE_ID_PARAM}.test" > ${WORKSPACE}/batterystats.txt
+  $ANDROID_HOME/platform-tools/adb -s 192.168.252.125:5555 shell dumpsys batterystats ${PACKAGE_ID_PARAM} > ${WORKSPACE}/batterystats.txt
 fi
 
 $ANDROID_HOME/platform-tools/adb bugreport ${WORKSPACE}/bugreport.zip
