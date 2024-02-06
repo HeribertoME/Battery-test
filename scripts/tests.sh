@@ -50,7 +50,7 @@ if [ "$TEST_TYPE_PARAM" = "manual" ]; then
   sleep $minutes
 else
   # Run automated tests
-  ${WORKSPACE}/gradlew :app:connectedCheck :app:installDebug :app:installDebugAndroidTest
+  ${WORKSPACE}/gradlew :app:connectedCheck :app:installDebugAndroidTest
 fi
 
 # Generates battery stats file
@@ -59,7 +59,7 @@ echo "Generating batterystats"
 if [ "$TEST_TYPE_PARAM" = "manual" ]; then
   $ANDROID_HOME/platform-tools/adb -s 192.168.252.125:5555 shell dumpsys batterystats ${PACKAGE_ID_PARAM} > ${WORKSPACE}/batterystats.txt
 else
-  $ANDROID_HOME/platform-tools/adb -s 192.168.252.125:5555 shell dumpsys batterystats ${PACKAGE_ID_PARAM} > ${WORKSPACE}/batterystats.txt
+  $ANDROID_HOME/platform-tools/adb -s 192.168.252.125:5555 shell dumpsys batterystats "${PACKAGE_ID_PARAM}.test" > ${WORKSPACE}/batterystats.txt
 fi
 
 $ANDROID_HOME/platform-tools/adb bugreport ${WORKSPACE}/bugreport.zip
