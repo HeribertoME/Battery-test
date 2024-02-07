@@ -63,7 +63,7 @@ else
   $ANDROID_HOME/platform-tools/adb -s 192.168.252.125:5555 shell dumpsys batterystats "${PACKAGE_ID_PARAM}.test" > ${WORKSPACE}/batterystats.txt
 fi
 
-$ANDROID_HOME/platform-tools/adb bugreport ${WORKSPACE}/bugreport.zip
+#$ANDROID_HOME/platform-tools/adb bugreport ${WORKSPACE}/bugreport.zip
 
 # Stop the background processes
 #kill $LOGCAT_PID
