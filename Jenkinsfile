@@ -7,7 +7,7 @@ pipeline {
         description: 'Selection to OS',
         name: 'OS_TYPE_PARAM')
     choice(
-        choices: ['STREAMING', 'BANKING', 'DELIVERY', 'ECOMMERCE', 'SOCIAL', 'VIDEOGAME'],
+        choices: ['STREAMING', 'BANKING', 'DELIVERY', 'ECOMMERCE', 'SOCIAL', 'VIDEOGAME', 'DEMO - SUCCESS', 'DEMO - UNSUCSESS'],
         description: 'Selection to OS',
         name: 'APP_TYPE_PARAM')
     choice(
