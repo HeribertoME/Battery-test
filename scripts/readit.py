@@ -168,7 +168,7 @@ try:
     while i <= len(uIdNamesList) - 1:
         #row = [str(uIdNamesList[i]),str(uIdValuesList[i])]
         #tableNames.append(row)
-        if uIdValuesList[i]:
+         if i <= (len(uIdValuesList) - 1):
             createLine = "  - ",str(uIdNamesList[i]), " ", str(uIdValuesList[i]), " \r\n"
             doc.writelines(createLine)
         i += 1
@@ -176,26 +176,22 @@ try:
     #doc.writelines(tabFull)
     doc.close()
 
-    if uIdValuesList[0]:
+    if len(uIdValuesList) > 0:
         STAGE_SUCCESS=1
         TOTAL_ENERGY_CONSUMPTION= uIdValuesList[0]
-
 
     if float(TOTAL_ENERGY_CONSUMPTION) <= float(PIVOT_PARAM):
         STAGE_SUCCESS=1
     else:
         STAGE_SUCCESS=0
 
-    subprocess.run(["sh", WORKSPACE+'/scripts/analyze.sh',
+except Exception as error:
+      STAGE_SUCCESS=0
+      print('An exception occurred: {}'.format(error))
+
+
+subprocess.run(["sh", WORKSPACE+'/scripts/analyze.sh',
                     str(STRICT_MODE_PARAM),
                     str(PIVOT_PARAM),
                     str(STAGE_SUCCESS),
                     str(TOTAL_ENERGY_CONSUMPTION)])
-except Exception as error:
-      STAGE_SUCCESS=0
-      subprocess.run(["sh", WORKSPACE+'/scripts/analyze.sh',
-                          str(STRICT_MODE_PARAM),
-                          str(PIVOT_PARAM),
-                          str(STAGE_SUCCESS),
-                          str(TOTAL_ENERGY_CONSUMPTION)])
-      print('An exception occurred: {}'.format(error))
