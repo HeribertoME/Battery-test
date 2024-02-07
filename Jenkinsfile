@@ -14,7 +14,7 @@ pipeline {
         choices: ['manual', 'automated'],
         description: 'Selection to make tests',
         name: 'TEST_TYPE_PARAM')
-    string (
+    choice (
         defaultValue: ['2', '5', '8', '10', '15', '20'],
         description: 'Time on minutes of manual tests',
         name: 'TEST_TIME_PARAM')
