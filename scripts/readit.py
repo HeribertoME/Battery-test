@@ -9,7 +9,7 @@ TEST_TYPE_PARAM=sys.argv[3]
 TEST_TIME_PARAM=sys.argv[4]
 STRICT_MODE_PARAM=sys.argv[5]
 APP_TYPE_PARAM=sys.argv[6]
-PACKAGE_ID_PARAM="com.example.batterytestapplication"
+PACKAGE_ID_PARAM=sys.argv[7]
 STAGE_SUCCESS=0
 TOTAL_ENERGY_CONSUMPTION=0
 
@@ -168,21 +168,18 @@ try:
     while i <= len(uIdNamesList) - 1:
         #row = [str(uIdNamesList[i]),str(uIdValuesList[i])]
         #tableNames.append(row)
-        createLine = "  - ",str(uIdNamesList[i]), " ", str(uIdValuesList[i]), " \r\n"
-        doc.writelines(createLine)
+        if uIdValuesList[i]:
+            createLine = "  - ",str(uIdNamesList[i]), " ", str(uIdValuesList[i]), " \r\n"
+            doc.writelines(createLine)
         i += 1
-
     #tabFull = tabulate(tableNames,["Campos","Valor"])
     #doc.writelines(tabFull)
     doc.close()
 
-
     if uIdValuesList[0]:
         STAGE_SUCCESS=1
         TOTAL_ENERGY_CONSUMPTION= uIdValuesList[0]
-        print("uIdValuesList PRESENT as: "+uIdValuesList[0])
-    else:
-        print("uIdValuesList NOT PRESENT")
+
 
     if float(TOTAL_ENERGY_CONSUMPTION) <= float(PIVOT_PARAM):
         STAGE_SUCCESS=1
