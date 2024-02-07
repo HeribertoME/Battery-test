@@ -164,14 +164,14 @@ try:
     getCPUStats()
 
 
-    i = 0
-    while i <= len(uIdNamesList) - 1:
+    #i = 0
+    #while i <= len(uIdNamesList) - 1:
         #row = [str(uIdNamesList[i]),str(uIdValuesList[i])]
         #tableNames.append(row)
-        if i <= (len(uIdValuesList) - 1):
-            createLine = "  - ",str(uIdNamesList[i]), " ", str(uIdValuesList[i]), " \r\n"
-            doc.writelines(createLine)
-        i += 1
+        #if i <= (len(uIdValuesList) - 1):
+           # createLine = "  - ",str(uIdNamesList[i]), " ", str(uIdValuesList[i]), " \r\n"
+           # doc.writelines(createLine)
+        #i += 1
     #tabFull = tabulate(tableNames,["Campos","Valor"])
     #doc.writelines(tabFull)
     doc.close()
