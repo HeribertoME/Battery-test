@@ -37,6 +37,10 @@ elif APP_TYPE_PARAM == "SOCIAL":
     PIVOT_PARAM = float(0.0030179)
 elif APP_TYPE_PARAM == "VIDEOGAME":
     PIVOT_PARAM = float(0.0050179)
+elif APP_TYPE_PARAM == "DEMO - SUCCESS":
+        PIVOT_PARAM = float(0.999999)
+elif APP_TYPE_PARAM == "DEMO - UNSUCSESS":
+                PIVOT_PARAM = float(0.0000001)
 else:
     PIVOT_PARAM = 0
 
@@ -192,4 +196,9 @@ try:
                     str(TOTAL_ENERGY_CONSUMPTION)])
 except Exception as error:
       STAGE_SUCCESS=0
+      subprocess.run(["sh", WORKSPACE+'/scripts/analyze.sh',
+                          str(STRICT_MODE_PARAM),
+                          str(PIVOT_PARAM),
+                          str(STAGE_SUCCESS),
+                          str(TOTAL_ENERGY_CONSUMPTION)])
       print('An exception occurred: {}'.format(error))
