@@ -16,7 +16,6 @@ pipeline {
         name: 'TEST_TYPE_PARAM')
     choice (
         choices: ['2', '5', '8', '10', '15', '20'],
-        defaultValue: '2',
         description: 'Time on minutes of manual tests',
         name: 'TEST_TIME_PARAM')
     string (
