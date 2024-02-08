@@ -13,7 +13,7 @@ if [ "$STRICT_MODE_PARAM" = "true" ] && [ "$STAGE_SUCCESS" = "1" ]; then
   echo "**********************************************************"
   echo "*                                                        *"
   echo "* ✅Consumo energético dentro del valor de referencia ✅ *"
-  echo "*              Ejecución estricta exitosa                *"
+  echo "*                  Ejecución  exitosa                    *"
   echo "*                                                        *"
   echo "**********************************************************"
   echo
@@ -24,8 +24,8 @@ if [ "$STRICT_MODE_PARAM" = "true" ] && [ "$STAGE_SUCCESS" = "0" ]; then
     echo "**********************************************************"
     echo "*                                                        *"
     echo "* ⛔ Consumo energetico superó el valor de referencia ⛔ *"
-    echo "*            Ejecucion estricta no exitosa               *"
-    echo "*              El pipeline se ha detenido                *"
+    echo "*                  Ejecucion no exitosa                  *"
+    echo "*                El pipeline se ha detenido              *"
     echo "*                                                        *"
     echo "**********************************************************"
     echo
@@ -36,7 +36,7 @@ if [ "$STRICT_MODE_PARAM" = "false" ] && [ "$STAGE_SUCCESS" = "1" ]; then
   echo "**********************************************************"
   echo "*                                                        *"
   echo "* ✅Consumo energético dentro del valor de referencia ✅ *"
-  echo "*            Ejecución no estricta exitosa               *"
+  echo "*                   Ejecución  exitosa                   *"
   echo "*                                                        *"
   echo "**********************************************************"
   echo
@@ -44,11 +44,10 @@ if [ "$STRICT_MODE_PARAM" = "false" ] && [ "$STAGE_SUCCESS" = "1" ]; then
 fi
 
 if [ "$STRICT_MODE_PARAM" = "false" ] && [ "$STAGE_SUCCESS" = "0" ]; then
-  echo "OPTIMAL ENERGY UNSUCCESS WITH STRICT MODE"
       echo "**********************************************************"
       echo "*                                                        *"
       echo "* ⚠️ Consumo energetico superó el valor de referencia ⚠️ *"
-      echo "*            Ejecución no estricta exitosa               *"
+      echo "*                  Ejecución exitosa                     *"
       echo "*                                                        *"
       echo "**********************************************************"
       echo
